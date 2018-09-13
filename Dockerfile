@@ -1,7 +1,7 @@
 # see https://hub.docker.com/_/ubuntu/ for versions, should be the same as on Travis for NodeMCU CI
 # 14.04 == trusty
 FROM ubuntu:14.04
-MAINTAINER marcelstoer
+MAINTAINER goutham414
 
 # If you want to tinker with this Dockerfile on your machine do as follows:
 # - git clone https://github.com/marcelstoer/docker-nodemcu-build
