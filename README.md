@@ -1,10 +1,9 @@
 # Docker NodeMCU build and LFS images
-[![Docker Pulls](https://img.shields.io/docker/pulls/marcelstoer/nodemcu-build.svg)](https://hub.docker.com/r/marcelstoer/nodemcu-build/) [![Docker Stars](https://img.shields.io/docker/stars/marcelstoer/nodemcu-build.svg)](https://hub.docker.com/r/marcelstoer/nodemcu-build/) [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/marcelstoer/docker-nodemcu-build/blob/master/LICENSE)
+[![Docker Pulls](https://img.shields.io/docker/pulls/gouthamr/nodemcu-build.svg)](https://hub.docker.com/r/gouthamr/nodemcu-build/) [![Docker Stars](https://img.shields.io/docker/stars/gouthamr/nodemcu-build.svg)](https://hub.docker.com/r/gouthamr/nodemcu-build/) [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/goutham414/docker-nodemcu-build/blob/master/LICENSE)
 
 Clone and edit the [NodeMCU firmware](https://github.com/nodemcu/nodemcu-firmware) locally on your platform. This image will take it from there and turn your code into a binary which you then can [flash to the ESP8266](http://nodemcu.readthedocs.org/en/dev/en/flash/).
 It can also create LFS images from your Lua sources.
 
-[中文文档请参阅 README-CN.md](README-CN.md)
 
 ## Target audience
 I see 3 types of NodeMCU developers:
@@ -44,7 +43,7 @@ The version information and build date are correctly set automatically unless yo
 ### Run this image with Docker to create the firmware
 Start Docker and change to the NodeMCU firmware directory (in the Docker console). To build the firmware run:
 
-``docker run --rm -ti -v `pwd`:/opt/nodemcu-firmware marcelstoer/nodemcu-build build``
+``docker run --rm -ti -v `pwd`:/opt/nodemcu-firmware gouthamr/nodemcu-build build``
 
 Depending on the performance of your system it takes 1-3min until the compilation finishes. The first time you run this it takes longer because Docker needs to download the image and create a container.
 
@@ -67,7 +66,7 @@ There are several [tools to flash the firmware](http://nodemcu.readthedocs.org/e
 ### Run this image with Docker to create an LFS image
 Start Docker and change to the NodeMCU firmware directory (in the Docker console). To create the LFS image run:
 
-``docker run --rm -ti -v `pwd`:/opt/nodemcu-firmware marcelstoer/nodemcu-build -v {PathToLuaSourceFolder}:/opt/lua marcelstoer/nodemcu-build lfs-image``
+``docker run --rm -ti -v `pwd`:/opt/nodemcu-firmware gouthamr/nodemcu-build -v {PathToLuaSourceFolder}:/opt/lua gouthamr/nodemcu-build lfs-image``
 
 This will compile and store all Lua files in the given folder including subfolders.
 
@@ -78,27 +77,24 @@ Depending on what type(s) of firmware you built this will create one or two LFS 
 
 (Docker on) Windows handles paths slightly differently. You need to specify the full path to the NodeMCU firmware directory in the command and you need to add an extra forward slash (`/`) to the Windows path. The command thus becomes (`c` equals C drive i.e. `c:`):
 
-`docker run --rm -it -v //c/Users/<user>/<nodemcu-firmware>:/opt/nodemcu-firmware marcelstoer/nodemcu-build build`
+`docker run --rm -it -v //c/Users/<user>/<nodemcu-firmware>:/opt/nodemcu-firmware gouthamr/nodemcu-build build`
 
 If the Windows path contains spaces it would have to be wrapped in quotes as usual on Windows.
 
-`docker run --rm -it -v "//c/Users/monster tune/<nodemcu-firmware>":/opt/nodemcu-firmware marcelstoer/nodemcu-build build`
+`docker run --rm -it -v "//c/Users/monster tune/<nodemcu-firmware>":/opt/nodemcu-firmware gouthamr/nodemcu-build build`
 
 If this Docker container hangs on sharing the drive (or starting) check whether the Windows service 'LanmanServer' is running. See [DockerBug #2196](https://github.com/docker/for-win/issues/2196) for details.
 
 ### :bangbang: If you have previously pulled this Docker image (e.g. with the command above) you should update the image from time to time to pull in the latest bug fixes:
 
-`docker pull marcelstoer/nodemcu-build`
+`docker pull gouthamr/nodemcu-build`
 
 ## Support
 Ask a question on [StackOverflow](http://stackoverflow.com/) and assign the `nodemcu` and `docker` tags.
 
-For bugs and improvement suggestions create an issue at [https://github.com/marcelstoer/docker-nodemcu-build/issues](https://github.com/marcelstoer/docker-nodemcu-build/issues).
+For bugs and improvement suggestions create an issue at [https://github.com/goutham414/nodemcu-build/issues](https://github.com/goutham414/nodemcu-build/issues).
 
 ## Credits
 Thanks to [Paul Sokolovsky](http://pfalcon-oe.blogspot.com/) who created and maintains [esp-open-sdk](https://github.com/pfalcon/esp-open-sdk).
-
+Thanks to [marcelstoer](http://frightanic.com)
 A big "Thank You!" goes to [Gregor Hartmann](https://github.com/HHHartmann) who implemented LFS-support and removed the ill-designed `INTEGER_ONLY` / `FLOAT_ONLY` parameters for this image.
-
-## Author
-[https://frightanic.com](http://frightanic.com)
