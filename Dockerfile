@@ -1,7 +1,7 @@
 # see https://hub.docker.com/_/ubuntu/ for versions, should be the same as on Travis for NodeMCU CI
 # 14.04 == trusty
 FROM ubuntu:18.04
-MAINTAINER goutham414
+MAINTAINER Goutham
 
 # If you want to tinker with this Dockerfile on your machine do as follows:
 # - git clone https://github.com/marcelstoer/docker-nodemcu-build
@@ -9,8 +9,10 @@ MAINTAINER goutham414
 # - docker build -t docker-nodemcu-build docker-nodemcu-build
 # - cd <nodemcu-firmware>
 # - docker run --rm -ti -v `pwd`:/opt/nodemcu-firmware docker-nodemcu-build
-
+RUN export DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y wget unzip git make python-serial srecord bc xz-utils gcc ccache tzdata
+RUN ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+RUN dpkg-reconfigure --frontend noninteractive tzdata
 # Release some space...
 RUN rm -rf /var/lib/apt/lists/*
 RUN mkdir /opt/nodemcu-firmware
