@@ -11,6 +11,8 @@ MAINTAINER goutham414
 # - docker run --rm -ti -v `pwd`:/opt/nodemcu-firmware docker-nodemcu-build
 
 RUN apt-get update && apt-get install -y wget unzip git make python-serial srecord bc xz-utils gcc ccache tzdata
+RUN ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+RUN dpkg-reconfigure --frontend noninteractive tzdata
 # Release some space...
 RUN rm -rf /var/lib/apt/lists/*
 RUN mkdir /opt/nodemcu-firmware
